@@ -12,19 +12,23 @@ const Expenseform = (props) => {
     const { name, value } = e.target;
     setInputValues((prevState) => ({
       ...prevState,
-      [name]: name === 'date' ? new Date(value) : value,
+      [name]: value,
     }));
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    props.onSaveExpenseData(inputValues);
+    props.onSaveExpenseData({
+      ...inputValues,
+      date: new Date(inputValues.date),
+    });
     setInputValues((prevState) => ({
       ...prevState,
       title: '',
       amount: '',
       date: '',
     }));
+    props.onCancelEditing();
   };
 
   return (
@@ -63,6 +67,9 @@ const Expenseform = (props) => {
         </div>
       </div>
       <div className='new-expense__actions'>
+        <button type='button' onClick={props.onCancelEditing}>
+          Cancel
+        </button>
         <button type='submit'>Add Expense</button>
       </div>
     </form>

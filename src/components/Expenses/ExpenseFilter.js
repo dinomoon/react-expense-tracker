@@ -10,7 +10,7 @@ const Expensefilter = (props) => {
   return (
     <div className='expenses-filter'>
       <div className='expenses-filter__control'>
-        <label htmlFor=''>Filter</label>
+        <label htmlFor=''>Filter by year</label>
         <select
           value={props.selected}
           name=''
